@@ -6,6 +6,8 @@
 
 # Filters - logic to store compiled lists\dicts and use them for sorting
 
+define zngImages = []
+default persistent.zng_unlocked = False
 
 init python:
     class ZNGalleryImage:
@@ -23,63 +25,6 @@ init python:
             self.fullsize = fullsize
             self.label = label
             self.thumbnail = thumbnail
-            self.action = ShowTransient('zn_gallery_replay', None, fullsize) #if fullsize else Call(label)
-
-screen zn_gallery_button(text = "Open gallery"):
-    hbox:
-        spacing 25
-        textbutton text:
-            action ShowMenu('zn_gallery')
-            # xysize (200, 80)
-
-style zng is frame:
-    background Solid('#777')
-    xalign 0.5
-    yalign 0.3
-    padding (0, 0)
-
-style zng_vpgrid is vpgrid:
-    margin (24, 24)
-
-screen zn_gallery(columnCount = 4):
-    default twidth = 400
-    default theight = 260
-    default tpadding = 4
-    default t2padding = tpadding * 2
-    default spacing = 12
-    default yspacing = 24
-
-    default rowCount = 3
-
-    frame:
-        style 'zng'
-        style_prefix 'zng'
-
-        vpgrid:
-            cols columnCount
-            draggable True
-            mousewheel True
-
-            if len(images) > 6:
-                scrollbars 'vertical'
-
-            ymaximum (theight * rowCount) + (yspacing * (rowCount + 1))
-            yspacing yspacing
-            xspacing spacing
-
-            for i in images:
-                frame:
-                    xysize (twidth, theight)
-                    padding (tpadding, tpadding)
-                    imagebutton:
-                        idle Transform(i.thumbnail, matrixcolor=TintMatrix('#fff'),xysize=(twidth-t2padding,theight-t2padding))
-                        hover Transform(i.thumbnail, matrixcolor=TintMatrix('#fcfa92'),xysize=(twidth-t2padding,theight-t2padding))
-                        action i.action
-
-                    add Text ("sauce [i.thumbnail]")
-
-screen zn_gallery_replay(source):
-    frame:
-        background Transform(source, xysize=(1920, 1080))
-        padding (0,0)
-        xysize (1920, 1080)
+            self.action = ShowTransient('zn_gallery_replay', Dissolve(0.2), fullsize) if fullsize else Call(label)
+            self.seenImage = seenImage
+            self.seenLabel = seenLabel
