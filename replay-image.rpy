@@ -7,6 +7,8 @@ style zng_replay_image is frame:
 #     xysize (1920, 1080)
 
 screen zn_gallery_replay(source):
+    zorder 10
+
     frame:
         style 'zng_replay_image'
         style_prefix 'zng_replay_image'

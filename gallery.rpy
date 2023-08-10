@@ -1,5 +1,4 @@
 style zng is frame:
-    zorder 5
     background Solid('#777')
     xalign 0.5
     yalign 0.3
@@ -23,6 +22,8 @@ screen zn_gallery(columnCount = 4, rowCount = 3, images = zngImages):
     default t2padding = tpadding * 2
     default spacing = 12
     default yspacing = 24
+
+    zorder 5
 
     frame:
         style 'zng'
