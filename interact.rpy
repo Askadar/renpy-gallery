@@ -7,4 +7,4 @@ screen zn_gallery_button(text = "Open gallery"):
         style 'zng_interact'
         style_prefix 'zng_interact'
 
-        textbutton text action ShowMenu('zn_gallery')
+        textbutton text action Show('zn_gallery')
